@@ -1,8 +1,8 @@
 # 【番外編】Raspberry Pi 3をMacから操作できるようにする
-内容は[SSHでリモート操作](#SSHでリモート操作)と[VNCを使って画面共有](#VNCを使って画面共有)の二本立て。  
+内容は[SSHでリモート操作](#SSH)と[VNCを使って画面共有](#VNC)の二本立て。  
 
 <br />
-## SSHでリモート操作
+## <a name = "SSH">SSHでリモート操作
 #### 手順
 1. [SSHの有効化](#1. SSHの有効化)
 2. [Raspberry PiのIPアドレスを調べる](#2. Raspberry PiのIPアドレスを調べる)
@@ -21,7 +21,7 @@ pi@raspberypi:~ $ ifconfig
 ```
 
 すると以下のような結果が表示される。
-**eth0** が有線接続、**wlan0** が無線接続に関する情報である。それぞれIPアドレスはinetアドレス: の欄に記載されている。  
+**eth0** が有線接続、**wlan0** が無線接続に関する情報である。それぞれIPアドレスはinetアドレス: の欄に記載されている。
 **lo** はローカルループバックアドレス（自分自身を指し示す特殊なIPアドレス）に関する項目で、どんな装置でも127.0.0.1で固定される。
 ```
 eth0      Link encap:イーサネット  ハードウェアアドレス b8:27:eb:a2:8a:57
@@ -105,7 +105,8 @@ Connection to 10.0.0.12 closed.
 YI-no-MacBook-Pro:~ Yusuke$
 ```
 
-<a name ="注1">注1. 
+<br />
+<a name = "注1">注1.
 WindowsでSSH接続を行うためには[Tera Term](https://osdn.jp/projects/ttssh2/ "Tera Term")や[PuTTY](http://hp.vector.co.jp/authors/VA024651/PuTTYkj.html "PuTTYjp")などのインストールが必要らしい...  
 > *― [第16回「Raspberry Pi A+でポータブルラズベリーパイを作ろう！」- IT女子のラズベリーパイ入門奮闘記][] ―*  
 > *― [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][] ―*  
@@ -120,7 +121,7 @@ Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割�
 ---
 
 <br />
-## VNCを使って画面共有
+## <a name = "VNC">VNCを使って画面共有
 SSH接続によってMacからRaspberry Piをリモート操作できるようになった。
 しかしコマンドライン操作（CUI）のみでRaspberry Piを操っていくのは、初心者の我々にはややハードルが高い。
 そこでデスクトップ操作（GUI）が可能になるVNCを導入することにする。  
