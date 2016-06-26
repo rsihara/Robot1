@@ -10,11 +10,11 @@
 4. [Raspberry PiのIPアドレスを固定化する](#4. Raspberry PiのIPアドレスを固定化する)
 
 <br />
-#### <a name = "SSHの有効化">1. SSHの有効化
+#### <a name = "1. SSHの有効化">1. SSHの有効化
 「Menu」→「設定」→「Raspberry Piの設定」→「インターフェイス」→「SSHの有効化（ラジオボタンをクリック）」→ 「OK」
 
 <br />
-#### <a name = "">2. Raspberry PiのIPアドレスを調べる
+#### <a name = "2. Raspberry PiのIPアドレスを調べる">2. Raspberry PiのIPアドレスを調べる
 LXTerminalを起動しifconfigと入力してENTER
 ```sh
 pi@raspberypi:~ $ ifconfig
@@ -56,7 +56,7 @@ wlan0     Link encap:イーサネット  ハードウェアアドレス b8:27:eb
 ```
 
 <br />
-#### <a name = "">3. SSHでログインできるか確認する
+#### <a name = "3. SSHでログインできるか確認する">3. SSHでログインできるか確認する
 MacからSSH接続するにはTerminalを起動するだけでOKらしい[<sup>注1</sup>](#注1)  
 MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
 ```sh
