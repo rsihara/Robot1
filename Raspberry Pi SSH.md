@@ -1,6 +1,6 @@
-# 【番外編】Raspberry Pi 3をPCから操作できるようにする
+## 【番外編】Raspberry Pi 3をPCから操作できるようにする
 
-## SSHでリモート操作
+### SSHでリモート操作
 #### 手順
 1. SSHの有効化
 2. Raspberry PiのIPアドレスを調べる
@@ -54,7 +54,7 @@ Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割�
 今後はRaspberry Piに電源を挿すだけ（ディスプレイやマウス、キーボードは繋げない）で、MacやPCからリモート操作できるようにしたいので、以下の手順でRaspberry Pi に固定IPアドレスを割り当てることにする。
 
 
-## VNCを使って画面共有
+### VNCを使って画面共有
 
 ### 参照サイト
 1. [Raspberry Pi に SSH接続する（有線）- Qiita](http://qiita.com/MarieKawasuji/items/6beb87d805b449b8f4e2)
