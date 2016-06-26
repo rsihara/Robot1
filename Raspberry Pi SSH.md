@@ -1,6 +1,8 @@
 ## 【番外編】Raspberry Pi 3をMacから操作できるようにする
 内容は[SSHでリモート操作](#SSHでリモート操作)と[VNCを使って画面共有](#VNCを使って画面共有)の二本立て  
 
+---
+
 ### SSHでリモート操作
 ##### 手順
 1. [SSHの有効化](#1. SSHの有効化)
@@ -17,8 +19,43 @@ LXTerminalを起動しifconfigと入力してENTER
 pi@raspberypi:~ $ ifconfig
 ```
 
+すると以下のような結果が表示される。  
+**eth0** が有線接続、**wlan0** が無線接続に関する情報である。それぞれIPアドレスはinetアドレス: の欄に記載されている。  
+**lo** はローカルループバックアドレス（自分自身を指し示す特殊なIPアドレス）に関する項目で、どんな装置でも127.0.0.1で固定される。
+```
+eth0      Link encap:イーサネット  ハードウェアアドレス b8:27:eb:a2:8a:57
+          inetアドレス:10.0.0.12 ブロードキャスト:10.0.0.255  マスク:255.255.255.0
+          inet6アドレス: 2601:42:1:8f00:336e:bf58:df7b:2a51/64 範囲:グローバル
+          inet6アドレス: fe80::b70:55a5:f1:22ba/64 範囲:リンク
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  メトリック:1
+          RXパケット:7237 エラー:0 損失:0 オーバラン:0 フレーム:0
+          TXパケット:6350 エラー:0 損失:0 オーバラン:0 キャリア:0
+      衝突(Collisions):0 TXキュー長:1000
+          RXバイト:1131873 (1.0 MiB)  TXバイト:3466673 (3.3 MiB)
+
+lo        Link encap:ローカルループバック  
+          inetアドレス:127.0.0.1 マスク:255.0.0.0
+          inet6アドレス: ::1/128 範囲:ホスト
+          UP LOOPBACK RUNNING  MTU:65536  メトリック:1
+          RXパケット:136 エラー:0 損失:0 オーバラン:0 フレーム:0
+          TXパケット:136 エラー:0 損失:0 オーバラン:0 キャリア:0
+      衝突(Collisions):0 TXキュー長:1
+          RXバイト:11472 (11.2 KiB)  TXバイト:11472 (11.2 KiB)
+
+wlan0     Link encap:イーサネット  ハードウェアアドレス b8:27:eb:f7:df:02
+          inetアドレス:10.0.0.11 ブロードキャスト:10.0.0.255  マスク:255.255.255.0
+          inet6アドレス: fe80::97a2:5d01:4094:571f/64 範囲:リンク
+          inet6アドレス: 2601:42:1:8f00:a022:4e95:cf0a:12c2/64 範囲:グローバル
+          UP BROADCAST RUNNING MULTICAST  MTU:1500  メトリック:1
+          RXパケット:8643 エラー:0 損失:7247 オーバラン:0 フレーム:0
+          TXパケット:915 エラー:0 損失:0 オーバラン:0 キャリア:0
+      衝突(Collisions):0 TXキュー長:1000
+          RXバイト:3153580 (3.0 MiB)  TXバイト:177359 (173.2 KiB)
+
+```
+
 ###### 3. SSHでログインできるか確認する
-MacからSSH接続するにはTerminalを起動するだけでOK！[^1]  
+MacからSSH接続するにはTerminalを起動するだけでOK[^1]  
 MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
 ```sh
 YI-no-MacBook-Pro:~ Yusuke$ ssh pi@10.0.0.12
@@ -75,6 +112,7 @@ Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割�
 今後はRaspberry Piに電源を挿すだけ（ディスプレイやマウス、キーボードは繋げない）で、MacやPCからリモート操作できるようにしたいので、以下の手順でRaspberry Pi に固定IPアドレスを割り当てることにする。
 
 ---
+
 ### VNCを使って画面共有
 SSH接続によってMacからRaspberry Piをリモート操作できるようになった。  
 しかしコマンドライン操作（CUI）のみでRaspberry Piを操っていくのは、初心者の我々にはややハードルが高い。  
@@ -84,6 +122,11 @@ SSH接続によってMacからRaspberry Piをリモート操作できるよう�
 > **Virtual Network Computing**  
 > リモートマシン（Raspberry Pi）のデスクトップ（GUI）を別のマシンから操作できるようにするツール  
 > *― [第3回「SSH」を使って、「Raspberry Pi」を操作する - ブラきよのラズベリーパイ][] ―*  
+
+##### 手順
+1. [Raspb Pi側にVNCサーバーをインストールする](#1. Raspb Pi側にVNCサーバーをインストールする)
+2. [Raspberry Piのポート情報の確認](#2. Raspberry Piのポート情報の確認)
+3. [MacからRaspberry PiにVNCで接続する](#3. MacからRaspberry PiにVNCで接続する)
 
 ##### 1. Raspb Pi側にVNCサーバーをインストールする
 まずはRaspberry Pi側にVNCサーバー機能をインストールする必要がある。  
@@ -110,14 +153,11 @@ pi@Raspberry:~ $ vncserver
 You will require a password to access your desktops.
 
 Password:
+Verify:
 ```
 
-korosukeと入力し（パスワードは表示されない）、ENTER
-```sh
-Verify:   
-```
-
-確認を求められるので、もう一度korosukeと入力しENTER
+korosukeと入力し（パスワードは表示されない）、ENTER  
+確認を求められるので、もう一度korosukeと入力しENTER  
 すると以下のメッセージが表示されるので、nと入力しENTER
 ```
 Would you like to enter a view-only password (y/n)?
@@ -159,6 +199,7 @@ Server Address:
 これで、CUIとGUIによるRaspberry Piのリモート操作が可能になった！！  
 これからはRaspberry Piにディスプレイやキーボード、マウスを接続する必要もなくなり、スッキリ＆ラクチンなり！
 
+---
 ### 参照サイト
 1. [Raspberry Pi に SSH接続する（有線）- Qiita][]
 1. [第3回「SSH」を使って、「Raspberry Pi」を操作する - ブラきよのラズベリーパイ][]
