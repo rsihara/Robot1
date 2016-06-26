@@ -1,4 +1,5 @@
 # 【番外編】Raspberry Pi 3をMacから操作できるようにする
+---
 内容は[SSHでリモート操作](#SSHでリモート操作)と[VNCを使って画面共有](#VNCを使って画面共有)の二本立て。  
 
 <br />
@@ -10,13 +11,11 @@
 4. [Raspberry PiのIPアドレスを固定化する](#4. Raspberry PiのIPアドレスを固定化する)
 
 <br />
-###### 1. SSHの有効化
-
+##### 1. SSHの有効化
 「Menu」→「設定」→「Raspberry Piの設定」→「インターフェイス」→「SSHの有効化（ラジオボタンをクリック）」→ 「OK」
 
-
-###### 2. Raspberry PiのIPアドレスを調べる
-
+<br />
+##### 2. Raspberry PiのIPアドレスを調べる
 LXTerminalを起動しifconfigと入力してENTER
 ```sh
 pi@raspberypi:~ $ ifconfig
@@ -57,9 +56,8 @@ wlan0     Link encap:イーサネット  ハードウェアアドレス b8:27:eb
 
 ```
 
-
-###### 3. SSHでログインできるか確認する
-
+<br />
+##### 3. SSHでログインできるか確認する
 MacからSSH接続するにはTerminalを起動するだけでOK[^1]
 MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
 ```sh
@@ -112,16 +110,14 @@ YI-no-MacBook-Pro:~ Yusuke$
 > *― [第16回「Raspberry Pi A+でポータブルラズベリーパイを作ろう！」- IT女子のラズベリーパイ入門奮闘記][] ―*  
 > *― [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][] ―*  
 
-
-###### 4. Raspberry PiのIPアドレスを固定化する
-
+<br />
+##### 4. Raspberry PiのIPアドレスを固定化する
 Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割り振られる。
 今後はRaspberry Piに電源を挿すだけ（ディスプレイやマウス、キーボードは繋げない）で、MacやPCからリモート操作できるようにしたいので、以下の手順でRaspberry Pi に固定IPアドレスを割り当てることにする。
 
 ---
 
 ## VNCを使って画面共有
-
 SSH接続によってMacからRaspberry Piをリモート操作できるようになった。
 しかしコマンドライン操作（CUI）のみでRaspberry Piを操っていくのは、初心者の我々にはややハードルが高い。
 そこでデスクトップ操作（GUI）が可能になるVNCを導入することにする。  
@@ -131,16 +127,13 @@ SSH接続によってMacからRaspberry Piをリモート操作できるよう�
 > リモートマシン（Raspberry Pi）のデスクトップ（GUI）を別のマシンから操作できるようにするツール  
 > *― [第3回「SSH」を使って、「Raspberry Pi」を操作する - ブラきよのラズベリーパイ][] ―*  
 
-
 ##### 手順
-
 1. [Raspb Pi側にVNCサーバーをインストールする](#1. Raspb Pi側にVNCサーバーをインストールする)
 2. [Raspberry Piのポート情報の確認](#2. Raspberry Piのポート情報の確認)
 3. [MacからRaspberry PiにVNCで接続する](#3. MacからRaspberry PiにVNCで接続する)
 
-
-##### 1. Raspb Pi側にVNCサーバーをインストールする
-
+<br />
+#### 1. Raspb Pi側にVNCサーバーをインストールする
 まずはRaspberry Pi側にVNCサーバー機能をインストールする必要がある。
 今回は「tightvncserver」というパッケージをインストールする。
 
@@ -183,9 +176,8 @@ Starting applications specified in /home/pi/.vnc/xstartup
 Log file is /home/pi/.vnc/raspberrypi:1.log
 ```
 
-
-##### 2. Raspberry Piのポート情報の確認
-
+<br />
+#### 2. Raspberry Piのポート情報の確認
 次にRaspberry Pi側でVNC接続を受け付けるポートの情報を確認する。SSH接続から以下のコマンドを入力しENTER
 ```sh
 pi@raspberrypi:~ $ netstat -nlt
@@ -201,9 +193,8 @@ tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN
 tcp6       0      0 :::22                   :::*                    LISTEN
 ```
 
-
-##### 3. MacからRaspberry PiにVNCで接続する
-
+<br />
+#### 3. MacからRaspberry PiにVNCで接続する
 Macは標準でVNCサーバー接続をサポートしている。
 
 「Finder」→「GO」→「Connect to Server...」と移動すると、接続するサーバーのアドレスを確認するウインドウが現れる。
@@ -217,6 +208,8 @@ Server Address: の欄に`vnc://10.0.0.12:5901`と入力し（10.0.0.12は自分
 これで、CUIとGUIによるRaspberry Piのリモート操作が可能になった！！  
 これからはRaspberry Piにディスプレイやキーボード、マウスを接続する必要もなくなり、スッキリ＆ラクチンなり！
 
+<br />
+<br />
 ---
 ### 参照サイト
 1. [Raspberry Pi に SSH接続する（有線）- Qiita][]
