@@ -57,7 +57,7 @@ wlan0     Link encap:イーサネット  ハードウェアアドレス b8:27:eb
 
 <br />
 #### 3. SSHでログインできるか確認する
-MacからSSH接続するにはTerminalを起動するだけでOKらしい[^1]
+MacからSSH接続するにはTerminalを起動するだけでOKらしい[<sup>注1</sup>](#注1)  
 MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
 ```sh
 YI-no-MacBook-Pro:~ Yusuke$ ssh pi@10.0.0.12
@@ -105,8 +105,7 @@ Connection to 10.0.0.12 closed.
 YI-no-MacBook-Pro:~ Yusuke$
 ```
 
-[^1]: 脚注
-
+<a name ="注1">注1. 
 WindowsでSSH接続を行うためには[Tera Term](https://osdn.jp/projects/ttssh2/ "Tera Term")や[PuTTY](http://hp.vector.co.jp/authors/VA024651/PuTTYkj.html "PuTTYjp")などのインストールが必要らしい...  
 > *― [第16回「Raspberry Pi A+でポータブルラズベリーパイを作ろう！」- IT女子のラズベリーパイ入門奮闘記][] ―*  
 > *― [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][] ―*  
