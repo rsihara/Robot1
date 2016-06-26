@@ -1,41 +1,43 @@
-## 【番外編】Raspberry Pi 3をPCから操作できるようにする
+## 【番外編】Raspberry Pi 3をMacから操作できるようにする
+内容は[SSHでリモート操作](#SSHでリモート操作)と[VNCを使って画面共有](#VNCを使って画面共有)の二本立て  
 
 ### SSHでリモート操作
 ##### 手順
-```
-1. SSHの有効化
-2. Raspberry PiのIPアドレスを調べる
-3. SSHでログインできるか確認する
-4. Raspberry PiのIPアドレスを固定化する
-5.
-```
+1. [SSHの有効化](#1. SSHの有効化)
+2. [Raspberry PiのIPアドレスを調べる](#2. Raspberry PiのIPアドレスを調べる)
+3. [SSHでログインできるか確認する](#3. SSHでログインできるか確認する)
+4. [Raspberry PiのIPアドレスを固定化する](#4. Raspberry PiのIPアドレスを固定化する)
 
 ###### 1. SSHの有効化
 「Menu」→「設定」→「Raspberry Piの設定」→「インターフェイス」→「SSHの有効化（ラジオボタンをクリック）」→ 「OK」
 
 ###### 2. Raspberry PiのIPアドレスを調べる
 LXTerminalを起動しifconfigと入力してENTER
-```
+```sh
 pi@raspberypi:~ $ ifconfig
 ```
 
 ###### 3. SSHでログインできるか確認する
-MacのTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
-```
+MacからSSH接続するにはTerminalを起動するだけでOK！[^1]  
+MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
+```sh
 YI-no-MacBook-Pro:~ Yusuke$ ssh pi@10.0.0.12
 ```
+
 初回接続時のみ以下のメッセージが表示されるので、yesと入力する
 ```
 The authenticity of host '10.0.0.12 (10.0.0.12)' can't be established.
 ECDSA key fingerprint is SHA256:APj5BZ12TnGLzBJQnvy4u9QfqVZspxscaRS+Wkl4Os8.
 Are you sure you want to continue connecting (yes/no)?
 ```
+
 Raspberry Piのパスワードを求められるので、raspberry（初期設定のままの場合）と入力すると...
 ```
 Are you sure you want to continue connecting (yes/no)? yes
 Warning: Permanently added '10.0.0.12' (ECDSA) to the list of known hosts.
 pi@10.0.0.12's password:
 ```
+
 以下のメッセージが表示され
 ```
 The programs included with the Debian GNU/Linux system are free software;
@@ -46,18 +48,126 @@ Debian GNU/Linux comes with ABSOLUTELY NO WARRANTY, to the extent
 permitted by applicable law.
 Last login: Sun Jun 26 11:55:37 2016
 ```
+
 SSH接続に無事成功！
-```
+```sh
 pi@raspberrypi:~ $
 ```
+
+接続を解除したい場合はexitと入力するだけ
+```sh
+pi@raspberrypi:~ $ exit
+```
+
+すると以下のようなメッセージが表示され、元のTerminalの操作に戻る
+```
+ログアウト
+Connection to 10.0.0.12 closed.
+YI-no-MacBook-Pro:~ Yusuke$
+```
+
+[^1]: WindowsでSSH接続を行うためには[Tera Term](https://osdn.jp/projects/ttssh2/ "Tera Term")や[PuTTY](http://hp.vector.co.jp/authors/VA024651/PuTTYkj.html "PuTTYjp")などのインストールが必要らしい...  
+> *― [第16回「Raspberry Pi A+でポータブルラズベリーパイを作ろう！」- IT女子のラズベリーパイ入門奮闘記][] ―*  
+> *― [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][] ―*  
 
 ###### 4. Raspberry PiのIPアドレスを固定化する
 Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割り振られる。
 今後はRaspberry Piに電源を挿すだけ（ディスプレイやマウス、キーボードは繋げない）で、MacやPCからリモート操作できるようにしたいので、以下の手順でRaspberry Pi に固定IPアドレスを割り当てることにする。
 
-
+---
 ### VNCを使って画面共有
+SSH接続によってMacからRaspberry Piをリモート操作できるようになった。  
+しかしコマンドライン操作（CUI）のみでRaspberry Piを操っていくのは、初心者の我々にはややハードルが高い。  
+そこでデスクトップ操作（GUI）が可能になるVNCを導入することにする。  
+
+> ###### VNCとは？
+> **Virtual Network Computing**  
+> リモートマシン（Raspberry Pi）のデスクトップ（GUI）を別のマシンから操作できるようにするツール  
+> *― [第3回「SSH」を使って、「Raspberry Pi」を操作する - ブラきよのラズベリーパイ][] ―*  
+
+##### 1. Raspb Pi側にVNCサーバーをインストールする
+まずはRaspberry Pi側にVNCサーバー機能をインストールする必要がある。  
+今回は「tightvncserver」というパッケージをインストールする。  
+
+> tightvncserverとは、いくつかある「VNCツール」の中でも、通信速度の早いツールです。  
+> 画像を圧縮して通信するので、画面が若干見づらくなる事もあるようです。  
+> *― [第3回「SSH」を使って、「Raspberry Pi」を操作する - ブラきよのラズベリーパイ][] ―*  
+
+せっかくなのでSSHで接続したままでMacから以下のコマンドを入力し、VNCサーバーをインストールする。
+```sh
+pi@Raspberry:~ $ sudo apt-get update
+pi@Raspberry:~ $ sudo apt-get upgrade
+pi@Raspberry:~ $ sudo apt-get install tightvncserver
+```
+
+続いて以下のコマンドを入力して、インストールしたVNCサーバーを起動する。
+```sh
+pi@Raspberry:~ $ vncserver
+```
+
+すると以下のメッセージが表示されパスワードの設定を求められる。
+```
+You will require a password to access your desktops.
+
+Password:
+```
+
+korosukeと入力し（パスワードは表示されない）、ENTER
+```sh
+Verify:   
+```
+
+確認を求められるので、もう一度korosukeと入力しENTER
+すると以下のメッセージが表示されるので、nと入力しENTER
+```
+Would you like to enter a view-only password (y/n)?
+```
+
+これでRaspberry Pi側の設定は完了
+```
+New 'X' desktop is raspberrypi:1
+
+Starting applications specified in /home/pi/.vnc/xstartup
+Log file is /home/pi/.vnc/raspberrypi:1.log
+```
+
+##### 2. Raspberry Piのポート情報の確認
+次にRaspberry Pi側でVNC接続を受け付けるポートの情報を確認する。SSH接続から以下のコマンドを入力しENTER
+```sh
+pi@raspberrypi:~ $ netstat -nlt
+```
+
+すると以下のメッセージが表示される。状態がLISTENとなっているポートが生きているポートである。  
+ここではポート番号5901が生きているので、これを利用することにする。
+```
+稼働中のインターネット接続 (サーバのみ)
+Proto 受信-Q 送信-Q 内部アドレス            外部アドレス            状態       
+tcp        0      0 0.0.0.0:5901            0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:6001            0.0.0.0:*               LISTEN     
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN     
+tcp6       0      0 :::22                   :::*                    LISTEN
+```
+
+##### 3. MacからRaspberry PiにVNCで接続する
+Macは標準でVNCサーバー接続をサポートしている。  
+「Finder」→「GO」→「Connect to Server...」と移動すると、接続するサーバーのアドレスを確認するウインドウが現れる。  
+Server Address:  
+の欄に`vnc://10.0.0.12:5901`と入力し（10.0.0.12は自分のRaspberry PiのIPアドレス、5901は先ほど調べたポート番号）、「Connect」ボタンをクリック。  
+続いてパスワード入力画面が現れるので先ほど設定したパスワード（今回はkorosuke）を入力して、「Connect」ボタンをクリック。  
+するとMacのデスクトップ上にウインドウが現れ、Raspberry Piのデスクトップが表示される！  
+
+これで、CUIとGUIによるRaspberry Piのリモート操作が可能になった！！  
+これからはRaspberry Piにディスプレイやキーボード、マウスを接続する必要もなくなり、スッキリ＆ラクチンなり！
 
 ### 参照サイト
-1. [Raspberry Pi に SSH接続する（有線）- Qiita](http://qiita.com/MarieKawasuji/items/6beb87d805b449b8f4e2)
-1. [ブラきよのラズベリーパイ - 第3回「SSH」を使って、「Raspberry Pi」を操作する](http://burakiyo.com/raspberry-pi/third.php)
+1. [Raspberry Pi に SSH接続する（有線）- Qiita][]
+1. [第3回「SSH」を使って、「Raspberry Pi」を操作する - ブラきよのラズベリーパイ][]
+1. [第16回「Raspberry Pi A+でポータブルラズベリーパイを作ろう！」- IT女子のラズベリーパイ入門奮闘記][]
+1. [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][]
+1. [MacからRaspberry PiにVNCでリモートデスクトップ接続する方法 - darmus.net][]
+
+[Raspberry Pi に SSH接続する（有線）- Qiita]:	http://qiita.com/MarieKawasuji/items/6beb87d805b449b8f4e2	"Qiita"
+[第3回「SSH」を使って、「Raspberry Pi」を操作する - ブラきよのラズベリーパイ]:	http://burakiyo.com/raspberry-pi/third.php	"ブラきよのラズベリーパイ"
+[第16回「Raspberry Pi A+でポータブルラズベリーパイを作ろう！」- IT女子のラズベリーパイ入門奮闘記]:	http://deviceplus.jp/hobby/raspberrypi_entry_016/	"IT女子のラズベリーパイ入門奮闘記"
+[WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net]:	http://darmus.net/raspberry-pi-ssh-windows-putty/	"darmus.net"
+[MacからRaspberry PiにVNCでリモートデスクトップ接続する方法 - darmus.net]:	http://darmus.net/raspberry-pi-mac-vnc/	"darmus.net"
