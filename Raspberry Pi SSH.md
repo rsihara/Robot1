@@ -1,8 +1,8 @@
 # 【番外編】Raspberry Pi 3をMacから操作できるようにする
-内容は[SSHでリモート操作](#SSH)と[VNCを使って画面共有](#VNC)の二本立て。  
+内容は[SSHでリモート操作](#SSHでリモート操作)と[VNCを使って画面共有](#VNCを使って画面共有)の二本立て。  
 
 <br />
-## <a name = "SSH">SSHでリモート操作
+## <a name = "SSHでリモート操作">SSHでリモート操作
 #### 手順
 1. [SSHの有効化](#1. SSHの有効化)
 2. [Raspberry PiのIPアドレスを調べる](#2. Raspberry PiのIPアドレスを調べる)
@@ -10,11 +10,11 @@
 4. [Raspberry PiのIPアドレスを固定化する](#4. Raspberry PiのIPアドレスを固定化する)
 
 <br />
-#### 1. SSHの有効化
+#### <a name = "SSHの有効化">1. SSHの有効化
 「Menu」→「設定」→「Raspberry Piの設定」→「インターフェイス」→「SSHの有効化（ラジオボタンをクリック）」→ 「OK」
 
 <br />
-#### 2. Raspberry PiのIPアドレスを調べる
+#### <a name = "">2. Raspberry PiのIPアドレスを調べる
 LXTerminalを起動しifconfigと入力してENTER
 ```sh
 pi@raspberypi:~ $ ifconfig
@@ -56,7 +56,7 @@ wlan0     Link encap:イーサネット  ハードウェアアドレス b8:27:eb
 ```
 
 <br />
-#### 3. SSHでログインできるか確認する
+#### <a name = "">3. SSHでログインできるか確認する
 MacからSSH接続するにはTerminalを起動するだけでOKらしい[<sup>注1</sup>](#注1)  
 MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
 ```sh
@@ -112,7 +112,7 @@ WindowsでSSH接続を行うためには[Tera Term](https://osdn.jp/projects/tts
 > *― [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][] ―*  
 
 <br />
-#### 4. Raspberry PiのIPアドレスを固定化する
+#### <a name = "">4. Raspberry PiのIPアドレスを固定化する
 Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割り振られる。
 今後はRaspberry Piに電源を挿すだけ（ディスプレイやマウス、キーボードは繋げない）で、MacやPCからリモート操作できるようにしたいので、以下の手順でRaspberry Pi に固定IPアドレスを割り当てることにする。
 
@@ -121,7 +121,7 @@ Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割�
 ---
 
 <br />
-## <a name = "VNC">VNCを使って画面共有
+## <a name = "VNCを使って画面共有">VNCを使って画面共有
 SSH接続によってMacからRaspberry Piをリモート操作できるようになった。
 しかしコマンドライン操作（CUI）のみでRaspberry Piを操っていくのは、初心者の我々にはややハードルが高い。
 そこでデスクトップ操作（GUI）が可能になるVNCを導入することにする。  
@@ -137,7 +137,7 @@ SSH接続によってMacからRaspberry Piをリモート操作できるよう�
 3. [MacからRaspberry PiにVNCで接続する](#3. MacからRaspberry PiにVNCで接続する)
 
 <br />
-#### 1. Raspb Pi側にVNCサーバーをインストールする
+#### <a name = "">1. Raspb Pi側にVNCサーバーをインストールする
 まずはRaspberry Pi側にVNCサーバー機能をインストールする必要がある。
 今回は「tightvncserver」というパッケージをインストールする。
 
@@ -181,7 +181,7 @@ Log file is /home/pi/.vnc/raspberrypi:1.log
 ```
 
 <br />
-#### 2. Raspberry Piのポート情報の確認
+#### <a name = "">2. Raspberry Piのポート情報の確認
 次にRaspberry Pi側でVNC接続を受け付けるポートの情報を確認する。SSH接続から以下のコマンドを入力しENTER
 ```sh
 pi@raspberrypi:~ $ netstat -nlt
@@ -198,7 +198,7 @@ tcp6       0      0 :::22                   :::*                    LISTEN
 ```
 
 <br />
-#### 3. MacからRaspberry PiにVNCで接続する
+#### <a name = "">3. MacからRaspberry PiにVNCで接続する
 Macは標準でVNCサーバー接続をサポートしている。
 
 「Finder」→「GO」→「Connect to Server...」と移動すると、接続するサーバーのアドレスを確認するウインドウが現れる。
