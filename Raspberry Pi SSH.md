@@ -6,7 +6,7 @@
 2. Raspberry PiのIPアドレスを調べる
 3. SSHでログインできるか確認する
 4. Raspberry PiのIPアドレスを固定化する
-5. 
+5.
 
 ###### 1. SSHの有効化
 「Menu」→「設定」→「Raspberry Piの設定」→「インターフェイス」→「SSHの有効化（ラジオボタンをクリック）」→ 「OK」
