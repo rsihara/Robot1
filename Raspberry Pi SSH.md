@@ -3,18 +3,18 @@
 
 <br />
 ## SSHでリモート操作
-##### 手順
+#### 手順
 1. [SSHの有効化](#1. SSHの有効化)
 2. [Raspberry PiのIPアドレスを調べる](#2. Raspberry PiのIPアドレスを調べる)
 3. [SSHでログインできるか確認する](#3. SSHでログインできるか確認する)
 4. [Raspberry PiのIPアドレスを固定化する](#4. Raspberry PiのIPアドレスを固定化する)
 
 <br />
-##### 1. SSHの有効化
+#### 1. SSHの有効化
 「Menu」→「設定」→「Raspberry Piの設定」→「インターフェイス」→「SSHの有効化（ラジオボタンをクリック）」→ 「OK」
 
 <br />
-##### 2. Raspberry PiのIPアドレスを調べる
+#### 2. Raspberry PiのIPアドレスを調べる
 LXTerminalを起動しifconfigと入力してENTER
 ```sh
 pi@raspberypi:~ $ ifconfig
@@ -56,7 +56,7 @@ wlan0     Link encap:イーサネット  ハードウェアアドレス b8:27:eb
 ```
 
 <br />
-##### 3. SSHでログインできるか確認する
+#### 3. SSHでログインできるか確認する
 MacからSSH接続するにはTerminalを起動するだけでOK[^1]
 MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
 ```sh
@@ -110,7 +110,7 @@ YI-no-MacBook-Pro:~ Yusuke$
 > *― [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][] ―*  
 
 <br />
-##### 4. Raspberry PiのIPアドレスを固定化する
+#### 4. Raspberry PiのIPアドレスを固定化する
 Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割り振られる。
 今後はRaspberry Piに電源を挿すだけ（ディスプレイやマウス、キーボードは繋げない）で、MacやPCからリモート操作できるようにしたいので、以下の手順でRaspberry Pi に固定IPアドレスを割り当てることにする。
 
@@ -126,7 +126,7 @@ SSH接続によってMacからRaspberry Piをリモート操作できるよう�
 > リモートマシン（Raspberry Pi）のデスクトップ（GUI）を別のマシンから操作できるようにするツール  
 > *― [第3回「SSH」を使って、「Raspberry Pi」を操作する - ブラきよのラズベリーパイ][] ―*  
 
-##### 手順
+#### 手順
 1. [Raspb Pi側にVNCサーバーをインストールする](#1. Raspb Pi側にVNCサーバーをインストールする)
 2. [Raspberry Piのポート情報の確認](#2. Raspberry Piのポート情報の確認)
 3. [MacからRaspberry PiにVNCで接続する](#3. MacからRaspberry PiにVNCで接続する)
