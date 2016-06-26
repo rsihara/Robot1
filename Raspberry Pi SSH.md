@@ -21,7 +21,7 @@ pi@raspberypi:~ $ ifconfig
 ```
 
 すると以下のような結果が表示される。
-**eth0** が有線接続、**wlan0** が無線接続に関する情報である。それぞれIPアドレスはinetアドレス: の欄に記載されている。
+**eth0** が有線接続、**wlan0** が無線接続に関する情報である。それぞれIPアドレスはinetアドレス: の欄に記載されている。  
 **lo** はローカルループバックアドレス（自分自身を指し示す特殊なIPアドレス）に関する項目で、どんな装置でも127.0.0.1で固定される。
 ```
 eth0      Link encap:イーサネット  ハードウェアアドレス b8:27:eb:a2:8a:57
@@ -57,7 +57,7 @@ wlan0     Link encap:イーサネット  ハードウェアアドレス b8:27:eb
 
 <br />
 #### 3. SSHでログインできるか確認する
-MacからSSH接続するにはTerminalを起動するだけでOK[^1]
+MacからSSH接続するにはTerminalを起動するだけでOKらしい[^1]
 MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
 ```sh
 YI-no-MacBook-Pro:~ Yusuke$ ssh pi@10.0.0.12
@@ -105,7 +105,9 @@ Connection to 10.0.0.12 closed.
 YI-no-MacBook-Pro:~ Yusuke$
 ```
 
-[^1]: WindowsでSSH接続を行うためには[Tera Term](https://osdn.jp/projects/ttssh2/ "Tera Term")や[PuTTY](http://hp.vector.co.jp/authors/VA024651/PuTTYkj.html "PuTTYjp")などのインストールが必要らしい...  
+[^1]: 脚注
+
+WindowsでSSH接続を行うためには[Tera Term](https://osdn.jp/projects/ttssh2/ "Tera Term")や[PuTTY](http://hp.vector.co.jp/authors/VA024651/PuTTYkj.html "PuTTYjp")などのインストールが必要らしい...  
 > *― [第16回「Raspberry Pi A+でポータブルラズベリーパイを作ろう！」- IT女子のラズベリーパイ入門奮闘記][] ―*  
 > *― [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][] ―*  
 
@@ -114,8 +116,11 @@ YI-no-MacBook-Pro:~ Yusuke$
 Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割り振られる。
 今後はRaspberry Piに電源を挿すだけ（ディスプレイやマウス、キーボードは繋げない）で、MacやPCからリモート操作できるようにしたいので、以下の手順でRaspberry Pi に固定IPアドレスを割り当てることにする。
 
+<br />
+
 ---
 
+<br />
 ## VNCを使って画面共有
 SSH接続によってMacからRaspberry Piをリモート操作できるようになった。
 しかしコマンドライン操作（CUI）のみでRaspberry Piを操っていくのは、初心者の我々にはややハードルが高い。
@@ -208,7 +213,7 @@ Server Address: の欄に`vnc://10.0.0.12:5901`と入力し（10.0.0.12は自分
 これからはRaspberry Piにディスプレイやキーボード、マウスを接続する必要もなくなり、スッキリ＆ラクチンなり！
 
 <br />
-<br />
+
 ---
 ### 参照サイト
 1. [Raspberry Pi に SSH接続する（有線）- Qiita][]
