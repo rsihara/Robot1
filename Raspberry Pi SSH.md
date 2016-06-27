@@ -1,22 +1,23 @@
-# 【番外編】MacからRaspberry Pi 3をリモート操作するナリ！
+# 【番外編】Raspberry Pi 3をリモート操作するナリ！
 Raspberry Piをリモート操作できるようにするナリ！  
 [SSHでリモート操作](#SSHでリモート操作)と[VNCを使って画面共有](#VNCを使って画面共有)の二本立てでお送りするナリ！
 
 <br />
 ## <a name = "SSHでリモート操作">SSHでリモート操作
 #### 手順
-1. [SSHを有効化するナリ](#1. SSHの有効化)
-2. [Raspberry PiのIPアドレスを調べる](#2. Raspberry PiのIPアドレスを調べる)
-3. [SSHでログインできるか確認する](#3. SSHでログインできるか確認する)
-4. [Raspberry PiのIPアドレスを固定化する](#4. Raspberry PiのIPアドレスを固定化する)
+1. [SSHを有効化するナリ！](#1. SSHの有効化)
+2. [IPアドレスを調べるナリ！](#2. Raspberry PiのIPアドレスを調べる)
+3. [SSHでログインするナリ！](#3. SSHでログインできるか確認する)
+4. [IPアドレスを固定化するナリ！](#4. Raspberry PiのIPアドレスを固定化する)
 
 <br />
-#### <a name = "1. SSHの有効化">1. SSHを有効化するナリ
+#### <a name = "1. SSHの有効化">1. SSHを有効化するナリ！
+Raspberry Pi 3は初期設定でSSHが有効化されているが、SSHの有効化の方法は以下の通りである。  
 「Menu」→「設定」→「Raspberry Piの設定」→「インターフェイス」→「SSHの有効化（ラジオボタンをクリック）」→ 「OK」
 
 <br />
-#### <a name = "2. Raspberry PiのIPアドレスを調べる">2. Raspberry PiのIPアドレスを調べる
-LXTerminalを起動しifconfigと入力してENTER
+#### <a name = "2. Raspberry PiのIPアドレスを調べる">2. IPアドレスを調べるナリ！
+Raspberry PiのIPアドレスを調べるため、LXTerminalを起動しifconfigと入力してENTER
 ```sh
 pi@raspberypi:~ $ ifconfig
 ```
@@ -57,7 +58,7 @@ wlan0     Link encap:イーサネット  ハードウェアアドレス b8:27:eb
 ```
 
 <br />
-#### <a name = "3. SSHでログインできるか確認する">3. SSHでログインできるか確認する
+#### <a name = "3. SSHでログインできるか確認する">3. SSHでログインするナリ！
 MacからSSH接続するにはTerminalを起動するだけでOKらしい[<sup>注1</sup>](#注1)  
 MacのApplication一覧からTerminalを起動し、ssh pi@[Raspberry PiのIPアドレス]と入力してENTER
 ```sh
@@ -113,7 +114,7 @@ WindowsでSSH接続を行うためには[Tera Term](https://osdn.jp/projects/tts
 > *― [WindowsからPuTTYでRaspberry PiにSSH接続する方法 - darmus.net][] ―*  
 
 <br />
-#### <a name = "4. Raspberry PiのIPアドレスを固定化する">4. Raspberry PiのIPアドレスを固定化する
+#### <a name = "4. Raspberry PiのIPアドレスを固定化する">4. IPアドレスを固定化するナリ！
 Raspberry Piは初期状態ではDHCPのため、動的にIPアドレスが割り振られる。
 今後はRaspberry Piに電源を挿すだけ（ディスプレイやマウス、キーボードは繋げない）で、MacやPCからリモート操作できるようにしたいので、以下の手順でRaspberry Pi に固定IPアドレスを割り当てることにする。
 
