@@ -164,3 +164,7 @@ inetアドレスが 10.0.0.**101** になっていたら成功ナリ！！
 1. [第12回 Wi-Fi接続設定をする - ツール・ラボ RaspberryPi電子工作入門][]
 1. [MacでRaspberry Piセットアップ(補足) - ツール・ラボ ブログ][]
 1. [Raspbian 8.0 (jessie)で無線LANを使う - Qiita yosi-q][]
+
+[第12回 Wi-Fi接続設定をする - ツール・ラボ RaspberryPi電子工作入門]:	https://tool-lab.com/make/raspberrypi-startup-12/	"ツール・ラボ RaspberryPi電子工作入門"
+[MacでRaspberry Piセットアップ(補足) - ツール・ラボ ブログ]:	https://tool-lab.com/2013/11/mac%E3%81%A7raspberry-pi%E3%82%BB%E3%83%83%E3%83%88%E3%82%A2%E3%83%83%E3%83%97%E8%A3%9C%E8%B6%B3/	"ツール・ラボ ブログ"
+[Raspbian 8.0 (jessie)で無線LANを使う - Qiita yosi-q]:	http://qiita.com/yosi-q/items/c677e4650b22ffffa806	"Qiita yosi-q"
