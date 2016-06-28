@@ -1,6 +1,6 @@
 # 【番外編】Raspberry Pi 3をリモート操作するナリ！（その１）
 Raspberry Piをリモート操作できるようにするナリ！  
-[SSHでリモート操作](#SSHでリモート操作)と[IPアドレスの固定](#IPアドレスの固定)と[VNCで画面共有](#VNCで画面共有)の豪華三本立てでお送りするナリ！
+[SSHでリモート操作](#SSHでリモート操作)と[IPアドレスの固定](/Raspberry Pi SSH_2.md)と[VNCで画面共有](/Raspberry Pi SSH_2.md)の豪華三本立てでお送りするナリ！
 
 <br />
 ## <a name = "SSHでリモート操作">SSHでリモート操作
