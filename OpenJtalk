@@ -1,0 +1,26 @@
+sudo apt-get update
+sudo apt-get -y install open-jtalk libhtsengine1 open-jtalk-mecab-naist-jdic hts-voice-nitech-jp-atr503-m001
+open_jtalk -h
+
+wget http://tenet.dl.sourceforge.net/project/mmdagent/MMDAgent_Example/MMDAgent_Example-1.6/MMDAgent_Example-1.6.zip
+unzip MMDAgent_Example-1.6.zip
+mv -f ./MMDAgent_Example-1.6/Voice/mei/ ./Voice_mei/
+rm -r -f ./MMDAgent_Example-1.6
+
+sudo nano ~/Robot1/ojtalk_korosuke.sh
+
+#!/bin/sh
+TMP=/tmp/ojtalk_tmp.wav
+echo "$1" | open_jtalk \
+-x /var/lib/mecab/dic/open-jtalk/naist-jdic \
+-m ~/Robot1/Voice_mei/mei_normal.htsvoice \
+-a 0.3 \
+-r 0.9 \
+-fm 6 \
+-jf 2.5 \
+-ow $TMP
+aplay --quiet $TMP
+rm -f $TMP
+
+sudo chmod 755 ~/Robot1/ojtalk_korosuke.sh
+~/Robot1/ojtalk_korosuke.sh 我輩はコロ助なり。
