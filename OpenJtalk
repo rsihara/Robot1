@@ -14,8 +14,8 @@ TMP=/tmp/ojtalk_tmp.wav
 echo "$1" | open_jtalk \
 -x /var/lib/mecab/dic/open-jtalk/naist-jdic \
 -m ~/Robot1/Voice_mei/mei_normal.htsvoice \
--a 0.3 \
--r 0.9 \
+-a 0.35 \
+-r 0.8 \
 -fm 6 \
 -jf 2.5 \
 -ow $TMP
