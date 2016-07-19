@@ -7,12 +7,20 @@ url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=%s' %citycod
 
 response = requests.get(url)
 data = response.json()
+forecasts = data['forecasts']
+noinfo = '情報がありません'
+cast = forecasts[0]
+try:
+    temperature_min = cast['temperature']['min']['celsius']
+except:
+    temperature_min = noinfo
 
 print('**************************')
 print(data['title'])
 print('**************************')
 print(data['description']['text'])
-
+print('**************************')
+print(temperature_min)
 for forecast in data['forecasts']:
     print('**************************')
     print(forecast['dateLabel']+'('+forecast['date']+')')

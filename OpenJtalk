@@ -24,3 +24,8 @@ rm -f $TMP
 
 sudo chmod 755 ~/Robot1/ojtalk_korosuke.sh
 ~/Robot1/ojtalk_korosuke.sh 我輩はコロ助なり。
+
+$ sudo /etc/init.d/cron start
+$ sudo apt-get install chkconfig
+$ sudo chkconfig cron
+$ crontab -e
